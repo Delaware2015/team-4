@@ -4,7 +4,7 @@
 angular
     .module('parseServies', [
   	])
-	.service('parseServies', function Database($rootScope, $q, $http) 
+	.service('parseServies', function Database($rootScope, $q, $http, $state) 
 	{	
 		var dataType = ['string', 'pointer', 'time', 'bolean', 'number'];
 		var parseParams = {include: "_include", limit: "_limit", skip: "_skip", where: "_where", select: "_select", order: "_order"};
@@ -16,7 +16,8 @@ angular
 		{
 			// var defer = $q.defer();
 			Parse.initialize("Plbvy8xPvouq0pI393QyANx9TWXkh4gqk5nRVlod", "9lpB4VEEFy9Gb9bBnbSlRDxdnwIqoOXGjKfViFW0");
-			Parse.User.enableRevocableSession();
+			// $rootScope.sessionUser = Parse.User.current();
+			// Parse.User.enableRevocableSession();
 			var dataStruct = {
 			    "_User": {
 			        "group": {
@@ -238,16 +239,15 @@ angular
 		};
 
 		Database.prototype.login = function(data){
-			if (Parse.User.current()) {
-				Parse.User.logOut();
-			};
+			// Parse.User.logOut();
+			console.log(data)
 			var defer = $q.defer();
 			Parse.User.logIn(data.username, data.password, {
 				success: function(data) {
 					var results = new Database();
 					results.setPointerMapping(pointerMapping);
 					defer.resolve({results: results.decodeData(results.stripObject(data)), code: 200});
-					
+					$rootScope.$apply();
 				},
 				error: function(data, error) {
 					handleParseError(error.code);
@@ -305,22 +305,19 @@ angular
 
 		Database.prototype.post = function(table_name, data){
 			var table = new (Parse.Object.extend(table_name))();
-			var defer = $q.defer();
+			// var defer = $q.defer();
 			Database.prototype.encodeQuery(data);
 			table.save(data, {
 				success: function(data) {
-					var results = new Database();
-					results.setPointerMapping(pointerMapping);
-					defer.resolve({results: results.decodeData(results.stripObject(data)), code: 200});
-					
+					// var results = new Database();
+					// results.setPointerMapping(pointerMapping);
+					console.log(data);
+					location.reload();
 				},
 				error: function(error) {
-					handleParseError(error.code);
-					defer.resolve({results:{error: error.message, code: error.code}});
 					
 				}
 			});
-			return defer.promise;
 		    
 		};
 
@@ -334,17 +331,16 @@ angular
 					query[parseParams[keys[i]]] = params[keys[i]];
 				}
 			}
+
 			query.find({
 				success: function(data) {
 					var results = new Database();
 					results.setPointerMapping(pointerMapping);
 					defer.resolve({results: results.decodeData(results.stripArray(data)), code: 200});
-					// 
 				},
 				error: function(error) {
 					handleParseError(error.code);
 					defer.resolve({results:{error: error.message, code: error.code}});
-					// 
 				}
 			});
 			return defer.promise;

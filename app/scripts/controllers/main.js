@@ -15,9 +15,11 @@ angular.module('cfgApp')
       'Karma'
     ];
 
-    
-    // parseServies.logout();
     parseServies.init();
+    // console.log(Parse.User.current().id)
+
+    // parseServiess.logout();
+    // Parse.User.enableRevocableSession()
     $scope.init = function()
     {
       if ($rootScope.isInit == false) {
@@ -27,7 +29,6 @@ angular.module('cfgApp')
       
     }
     // console.log($rootScope.isInit)
-    $scope.init()
 
     // $rootScope.currentUser = parseServies.getCurrentUser();
 
@@ -38,7 +39,11 @@ angular.module('cfgApp')
     }
     $scope.signup = function(credentials)
     {
+      console.log(credentials)
+      delete credentials.passwordConfirm
       var user = new Parse.User();
+      user.set("fname", credentials.fname);
+      user.set("lname", credentials.lname);
       user.set("username", credentials.username);
       user.set("password", credentials.password);
       user.set("email", credentials.email);
@@ -47,51 +52,56 @@ angular.module('cfgApp')
           console.log(Parse.User.current())
         },
         error: function(data, error) {
-          handleParseError(error.code);
-
-          
+          console.log(error)
         }
       });
     }
 
     $scope.login = function(credentials)
     {
-      // Parse.User.logIn(credentials.username, credentials.password, {
-      //   success: function(data) {
-      //     $rootScope.currentUser = data;
-      //   },
-      //   error: function(data, error) {
-
-      //   }
-      // });
-      $state.go("profile");
-    }
-
-    $scope.get_tasks = function()
-    {
-      $rootScope.currentUser = parseServies.getCurrentUser();
-      var payload = {
-        group: "pc8rTAXqaq"
-      }
-      
-      parseServies.get("Tasks", payload).then(function(data){
-        if (!data.results.error) {
-
-          $scope.events = [];
-          for (var i = 0; i < data.results.length; i++) {
-            var event = {
-              title: data.results[i].name,
-              start: data.results[i].due,
-              id: 999
-            }
-            $scope.events.push(data.results[i].name)
-          };
-        } else{
-          $scope.login_error = 'Your username or password is incorrect';
-        }
+      parseServies.login(credentials).then(function(data)
+      {
+        // $rootScope.currentUser = parseServies.getCurrentUser().attributes;
+        var query = new Parse.Query(Parse.Object.extend("_User"));
+        query["username"] = credentials.username;
+        query._limit = 1;
+        query.find({
+          success: function(data) {
+            $rootScope.currentUser = data[0].attributes;
+            $state.go("profile");
+          },
+          error: function(error) {
+          }
+        });
       })
+      
     }
 
-    $scope.get_tasks();
+    // $scope.get_tasks = function()
+    // {
+    //   $rootScope.currentUser = parseServies.getCurrentUser();
+    //   var payload = {
+    //     group: "pc8rTAXqaq"
+    //   }
+      
+    //   parseServies.get("Tasks", payload).then(function(data){
+    //     if (!data.results.error) {
+
+    //       $scope.events = [];
+    //       for (var i = 0; i < data.results.length; i++) {
+    //         var event = {
+    //           title: data.results[i].name,
+    //           start: data.results[i].due,
+    //           id: 999
+    //         }
+    //         $scope.events.push(data.results[i].name)
+    //       };
+    //     } else{
+    //       $scope.login_error = 'Your username or password is incorrect';
+    //     }
+    //   })
+    // }
+
+    // $scope.get_tasks();
 
   });
