@@ -122,5 +122,15 @@ angular
         data: {
         },
       })
+
+      .state('checklist', 
+      {
+        url: "/checklist",
+        templateUrl: 'views/checklist.html',
+        data: {
+        },
+        controller: 'MainCtrl',
+      })
+
   });
 
