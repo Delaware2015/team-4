@@ -57,7 +57,7 @@ angular
         templateUrl: 'views/calendar.html',
         data: {
         },
-        controller: 'CalendarController',
+        controller: 'CalendarCtrl',
       })
 
       .state('profile', 
@@ -93,7 +93,7 @@ angular
         templateUrl: 'views/planner.html',
         data: {
         },
-        controller: 'MainCtrl',
+        controller: 'CalendarCtrl',
       })
 
       .state('social', 

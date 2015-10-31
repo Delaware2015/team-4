@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function CalendarController($scope, $rootScope, parseServies, $q) {
+  function CalendarCtrl($scope, $rootScope, parseServies, $q) {
     $scope.events = [];
     parseServies.init();
     $scope.get_events = function(start, end, timezone) {
@@ -9,8 +9,6 @@
       var d = date.getDate();
       var m = date.getMonth();
       var y = date.getFullYear();
-
-      console.log(new Date(y, m, 1));
 
       var payload = {
         group: "pc8rTAXqaq"
@@ -20,11 +18,10 @@
         if (!data.results.error) {
           var event = {};
           $scope.events = [];
-          console.log(data)
           for (var i = 0; i < data.results.length; i++) {
             var due_date = new Date();
             if (data.results[i].due !== undefined) {
-                due_date = new Date(data.results[i].due);
+                due_date = new Date(moment.utc(moment(data.results[i].due)));
             }
             // console.log(moment.utc(moment(data.results[i].due)))
             event = {
@@ -32,12 +29,12 @@
               start: due_date,
             };
             $scope.events.push(event);
-            console.log($scope.events)
+            defer.resolve({results: $scope.events});
           } 
         }
         else 
         {
-          $scope.login_error = 'Your username or password is incorrect';
+          $scope.login_error = 'error';
         }
       })
 
@@ -81,6 +78,7 @@
       // TODO: pass in current view date and time and cache data
       $scope.get_events(start, end, timezone).then(function() {
         callback($scope.events);
+
       });
     };
 
@@ -90,6 +88,6 @@
 
   angular
     .module('cfgApp')
-    .controller('CalendarController', CalendarController);
+    .controller('CalendarCtrl', CalendarCtrl);
 
 })();
