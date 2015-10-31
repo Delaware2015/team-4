@@ -226,12 +226,12 @@ angular
 				var results = new Database();
 					results.setPointerMapping(pointerMapping);
 					defer.resolve({results: results.decodeData(results.stripObject(data)), code: 200});
-					$rootScope.$apply();
+					
 				},
 				error: function(data, error) {
 					handleParseError(error.code);
 					defer.resolve({results:{error: error.message, code: error.code}});
-					$rootScope.$apply();
+					
 				}
 			});
 			return defer.promise;
@@ -247,12 +247,12 @@ angular
 					var results = new Database();
 					results.setPointerMapping(pointerMapping);
 					defer.resolve({results: results.decodeData(results.stripObject(data)), code: 200});
-					$rootScope.$apply();
+					
 				},
 				error: function(data, error) {
 					handleParseError(error.code);
 					defer.resolve({results:{error: error.message, code: error.code}});
-					$rootScope.$apply();
+					
 				}
 			});
 			return defer.promise;
@@ -283,19 +283,19 @@ angular
 					currentUser.save(null, {
 						success: function(currentUser) {
 							defer.resolve({results: currentUser, code: 200});
-							$rootScope.$apply();
+							
 						},
 						error: function(currentUser, error) {
 							handleParseError(error.code);
 							defer.resolve({results:{error: error.message, code: error.code}});
-							$rootScope.$apply();
+							
 						}
 					});
 				},
 				error: function(data, error) {
 					handleParseError(error.code);
 					defer.resolve({results:{error: error.message, code: error.code}});
-					$rootScope.$apply();
+					
 				}
 			});
 			return defer.promise;
@@ -312,12 +312,12 @@ angular
 					var results = new Database();
 					results.setPointerMapping(pointerMapping);
 					defer.resolve({results: results.decodeData(results.stripObject(data)), code: 200});
-					$rootScope.$apply();
+					
 				},
 				error: function(error) {
 					handleParseError(error.code);
 					defer.resolve({results:{error: error.message, code: error.code}});
-					$rootScope.$apply();
+					
 				}
 			});
 			return defer.promise;
@@ -339,12 +339,12 @@ angular
 					var results = new Database();
 					results.setPointerMapping(pointerMapping);
 					defer.resolve({results: results.decodeData(results.stripArray(data)), code: 200});
-					$rootScope.$apply();
+					// 
 				},
 				error: function(error) {
 					handleParseError(error.code);
 					defer.resolve({results:{error: error.message, code: error.code}});
-					$rootScope.$apply();
+					// 
 				}
 			});
 			return defer.promise;
@@ -369,23 +369,23 @@ angular
 						results.setPointerMapping(pointerMapping);
 				    	if (result._resolved) {
 					    	defer.resolve({results: results.decodeData(results.stripArray(result._result)), code: 200});
-					    	$rootScope.$apply();
+					    	
 					    } else
 					    {
 					    	defer.resolve({results:{error: "Failed to update", code: 400}});
-					    	$rootScope.$apply();
+					    	
 					    }
 				    });
 			  	} else {
 			  		defer.resolve({results:{error: "Database.prototype object does not exist", code: 404}});
-			  		$rootScope.$apply();
+			  		
 			  	}
 			  	
 			  },
 			  error: function(error) {
 			  	handleParseError(error.code);
 			    defer.resolve({results:{error: error.message, code: error.code}});
-			  	$rootScope.$apply();
+			  	
 			  }
 			});
 			return defer.promise;
@@ -402,22 +402,22 @@ angular
 				  	object.destroy({
 						  success: function(data) {
 						  	defer.resolve({results:{error: "Object " + data.id + " has been deleted"}, code: 200});
-						  	$rootScope.$apply();
+						  	
 						  },
 						  error: function(data, error) {
 						  	handleParseError(error.code);
 						    defer.resolve({results:{error: error.message, code: error.code}});
-						  	$rootScope.$apply();
+						  	
 						  }
 						});
 					} else {
 						defer.resolve({results:{error: "Object does not exist", code: 404}});
-						$rootScope.$apply();
+						
 					}	
 			  },
 			  error: function(error) {
 			    defer.resolve({results:{error: error.message, code: error.code}});
-			  	$rootScope.$apply();
+			  	
 			  }
 			});
 			return defer.promise;

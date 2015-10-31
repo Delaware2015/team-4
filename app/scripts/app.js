@@ -14,8 +14,14 @@
 angular
   .module('cfgApp', [
     'ui.router',
-    'parseServies'
+    'parseServies',
+    'ui.calendar',
+    'ui.bootstrap'
   ])
+  .controller('AppCtrl', function ($rootScope) {
+    $rootScope.isInit = false;
+  
+  })
   .config(function ($stateProvider) {
     // $routeProvider
     //   .when('/', {
@@ -43,6 +49,15 @@ angular
         data: {
         },
         controller: 'MainCtrl',
+      })
+
+      .state('calendar', 
+      {
+        url: "/calendar",
+        templateUrl: 'views/calendar.html',
+        data: {
+        },
+        controller: 'CalendarController',
       })
 
     
