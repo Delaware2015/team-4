@@ -19,28 +19,26 @@ angular
 			Parse.User.enableRevocableSession();
 			var dataStruct = {
 			    "_User": {
-			        "objectId": "string",
-			        "username": "string",
-			        "password": "string",
-			        "email": "string",
-			        "createdAt": "time",
-			        "updatedAt": "time",
-			        "emailVerified": "bolean"
+			        "group": {
+			          "_type": "pointer",
+			          "to": "group"
+			        },
 			      },
 
-			    "Shelves": {
-			        "objectId": "string",
-			        "name": "string",
-			        "description": "string",
-			        "order": "number",
-			        "createdAt": "time",
-			        "updatedAt": "time",
+			    "Tasks": {
 			        "createdBy": {
 			          "_type": "pointer",
 			          "to": "_User"
 			        },
-			        "file": "file"
+			    },
+
+			    "TaskStatus": {
+			        "task": {
+			          "_type": "pointer",
+			          "to": "Tasks"
+			        },
 			    }
+
 			}; 
 			Database.prototype.setPointerMapping(dataStruct);
 			// var defer = $q.defer();
@@ -148,10 +146,7 @@ angular
 				        className: pointerMapping[keys[i]],
 				        objectId: query[keys[i]]
 				    }
-				} 
-				if (query[keys[i]]._source && query[keys[i]]._source.file) {
-					continue
-				} else if (typeof(query[keys[i]]) === 'object') {
+				}else if (typeof(query[keys[i]]) === 'object') {
 					Database.prototype.encodeQuery(query[keys[i]]);
 				}
 			}
