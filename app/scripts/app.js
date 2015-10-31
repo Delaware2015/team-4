@@ -45,6 +45,24 @@ angular
         controller: 'MainCtrl',
       })
 
+      .state('profile', 
+      {
+        url: "/profile",
+        templateUrl: 'views/profile.html',
+        data: {
+        },
+        controller: 'MainCtrl',
+      })
+
+      .state('registration', 
+      {
+        url: "/registration",
+        templateUrl: 'views/registration.html',
+        data: {
+        },
+        controller: 'MainCtrl',
+      })
+
     
   });
 
