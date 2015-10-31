@@ -17,7 +17,8 @@ angular.module('cfgApp')
 
     parseServies.init();
     // console.log(Parse.User.current().id)
-
+    $rootScope.currentUser = parseServies.getCurrentUser();
+    console.log($rootScope.currentUser);
     // parseServiess.logout();
     // Parse.User.enableRevocableSession()
     $scope.init = function()
@@ -29,8 +30,6 @@ angular.module('cfgApp')
       
     }
     // console.log($rootScope.isInit)
-
-    // $rootScope.currentUser = parseServies.getCurrentUser();
 
     var credentials = {
       username: "test1",
