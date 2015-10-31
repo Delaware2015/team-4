@@ -49,6 +49,7 @@ angular.module('cfgApp')
       user.signUp(null, {
         success: function(data) {
           console.log(Parse.User.current())
+          $state.go("profile");
         },
         error: function(data, error) {
           console.log(error)
