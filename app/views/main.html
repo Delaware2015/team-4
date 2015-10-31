@@ -1,12 +1,5 @@
-<div class="nav">
-  <ul class ="pull-left">
-    <a href="#main"><img src="http://static1.squarespace.com/static/532b9929e4b04fa73367cfa7/53387d34e4b02123112ca915/53387d93e4b0d65d94f7c1bf/1396211092254/childrens+aid+society.jpg" alt="Logo" width="200" height="40"></a>
-
-    <li ng-if="!currentUser"><a href="#registration" ng-if="!currentUser">Registration</a></li>
-    <li ng-if="!currentUser"><a href="#login">Log In</a></li>
-    <li><a href="#resourcesnot">Resources</a></li>
-    <li ng-if="currentUser"><a ui-sref="planner">Planner</a></li>
-  </ul>
+<div class="header">
+  <div ng-include="'views/navbar.html'"></div>
 </div>
 
 <div class="jumbotron background_main">
