@@ -193,3 +193,29 @@ body {
     width: 14em;
 }
 
+
+.CAS h1{
+    color: #58D3F7;
+    font-size: 55px;
+}
+.CAS p{
+ font-size: 20px;
+ margin-bottom: 13px;
+}
+
+.to-do h2{
+  font-size:35px;
+  color: #58D3F7;
+}
+
+.to-do h3{
+  font-size:28px;
+}
+
+.toDoCont h3{
+  font-size:28px;
+}
+.other h3{
+  font-size:28px;
+}
+

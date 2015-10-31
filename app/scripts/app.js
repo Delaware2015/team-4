@@ -129,5 +129,15 @@ angular
         controller: 'MainCtrl',
       })
 
+      .state('edit', 
+      {
+        url: "/edit",
+        templateUrl: 'views/edit.html',
+        data: {
+        },
+        controller: 'MainCtrl',
+      })
+
+
   });
 
