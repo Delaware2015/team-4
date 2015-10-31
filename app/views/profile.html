@@ -27,28 +27,29 @@
     40% Complete (based on checklist)
   </div>
 </c>
+
             </div>
             <div class="panel-body">
               <div class="row">
                 <!--<div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://pbs.twimg.com/profile_images/3470882798/b30f3b4f149669a38b52fe513ed1e3e5.jpeg" class="img-circle img-responsive"> </div> -->
                 <div class=" col-md-9 col-lg-9 ">
-                  <table class="table table-user-information">
+                  <table class="table table-user-information" ng-init="get_user()">
                     <tbody>
                       <tr>
                         <td>Grade :</td>
-                        <td>Freshman</td>
+                        <td>{{currentUser.info.grade}}</td>
                       </tr>
                      <tr>
                         <td>Mentor :</td>
-                        <td>Mentor Name</a></td>
+                        <td>{{currentUser.info.mentor}}</a></td>
                       </tr>
                       <tr>
                         <td>Email :</td>
-                        <td>myemail@domain.com</a></td>
+                        <td>{{currentUser.info.email}}</a></td>
                       </tr>
                       <tr>
                         <td>Parent Email :</td>
-                        <td>myemail@domain.com</a></td>
+                        <td>{{currentUser.info.parentEmail}}</a></td>
                       </tr>
                     </tbody>
                   </table>
