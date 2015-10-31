@@ -4,7 +4,7 @@
   function CalendarCtrl($scope, $rootScope, parseServies, $q, $timeout, $state) {
     $scope.events = [];
     parseServies.init();
-    parseServies.logout();
+    // parseServies.logout();
     $scope.delete_event = function(data)
     {
       var payload = {
@@ -85,49 +85,49 @@
     // $scope.update_event()
 
     $scope.get_events = function(start, end, timezone) {
+      console.log($rootScope.isInit)
       if (!$rootScope.isInit) {
         $rootScope.isInit = true;
+        var where = {
+          status: "active"
+        }
+        var payload = {
+          where: where
+        }
+        var defer = $q.defer();
+        parseServies.get("Tasks", payload).then(function(data){
+          if (!data.results.error) {
+            $rootScope.tasks = data.results;
+            var event = {};
+            $scope.events = [];
+            for (var i = 0; i < data.results.length; i++) {
+              var due_date = new Date();
+              if (data.results[i].due !== undefined) {
+                  due_date = new Date(moment.utc(moment(data.results[i].due)));
+              }
+              // console.log(moment.utc(moment(data.results[i].due)))
+              event = {
+                title: data.results[i].name,
+                start: due_date,
+                objectId: data.results[i].objectId,
+                description: data.results[i].description,
+                due: data.results[i].due,
+                name: data.results[i].name
+              };
+              $scope.events.push(event);
+              defer.resolve({results: $scope.events});
+            } 
+          }
+          else 
+          {
+            $scope.login_error = 'error';
+          }
+        })
+        return defer.promise; 
       } else {
-        // location.reload();
-      }
-
-      var where = {
-        status: "active"
-      }
-      var payload = {
-        where: where
-      }
-      var defer = $q.defer();
-      parseServies.get("Tasks", payload).then(function(data){
-        if (!data.results.error) {
-          $rootScope.tasks = data.results;
-          var event = {};
-          $scope.events = [];
-          for (var i = 0; i < data.results.length; i++) {
-            var due_date = new Date();
-            if (data.results[i].due !== undefined) {
-                due_date = new Date(moment.utc(moment(data.results[i].due)));
-            }
-            // console.log(moment.utc(moment(data.results[i].due)))
-            event = {
-              title: data.results[i].name,
-              start: due_date,
-              objectId: data.results[i].objectId,
-              description: data.results[i].description,
-              due: data.results[i].due,
-              name: data.results[i].name
-            };
-            $scope.events.push(event);
-            defer.resolve({results: $scope.events});
-          } 
-        }
-        else 
-        {
-          $scope.login_error = 'error';
-        }
-      })
-
-      return defer.promise; 
+        location.reload();
+      } 
+      
     };
 
     $scope.add_task = function(data)
@@ -172,15 +172,25 @@
     };
 
     $scope.eventsCallback = function (start, end, timezone, callback) {
-      // TODO: pass in current view date and time and cache data
-      $scope.get_events(start, end, timezone).then(function() {
-        callback($scope.events);
-
-      });
+      console.log("here")
+      if (!$rootScope.isInit) {
+        $scope.get_events(start, end, timezone).then(function() {
+          callback($scope.events);
+          console.log($scope.eventSources)
+          if ($scope.events) {
+            $scope.memory = $scope.events;
+            console.log($scope.memory)
+          } 
+        });
+      } else
+      {
+        location.reload();
+        return null;
+      }
     };
 
     // send data to calendar
-    $scope.eventSources = [$scope.eventsCallback];
+    $scope.eventSources = [$scope.eventsCallback || $scope.memory];
   }
 
   angular
