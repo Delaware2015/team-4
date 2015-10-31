@@ -104,8 +104,8 @@ body {
 }
 
 .inner {
-    width: 50%;
-    margin: 0 auto;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .nav a {
@@ -164,12 +164,12 @@ body {
   color: #00b0ff;
 }
 .CAS{
-   background-color: #efefef;
-   border-bottom:1px solid #dbdbdb;
+ background-color: #efefef;
+ border-bottom:1px solid #dbdbdb;
 }
 .CAS h2{
-    color: #393c3d;
-    font-size: 24px;
+  color: #393c3d;
+  font-size: 24px;
 }
 .CAS p{
  font-size: 15px;
@@ -177,26 +177,26 @@ body {
 }
 
 .forum.table > tbody > tr > td {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 .forum .fa {
-    width: 1em;
-    text-align: center;
+  width: 1em;
+  text-align: center;
 }
 
 .forum.table th.cell-stat {
-    width: 6em;
+  width: 6em;
 }
 
 .forum.table th.cell-stat-2x {
-    width: 14em;
+  width: 14em;
 }
 
 
 .CAS h1{
-    color: #58D3F7;
-    font-size: 55px;
+  color: #58D3F7;
+  font-size: 55px;
 }
 .CAS p{
  font-size: 20px;
