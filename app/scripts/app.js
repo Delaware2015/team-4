@@ -37,7 +37,7 @@ angular
 
       .state('login', 
       {
-        url: "/",
+        url: "/login",
         templateUrl: 'views/login.html',
         data: {
         },
