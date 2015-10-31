@@ -50,7 +50,7 @@ angular
 
 			}; 
 			Database.prototype.setPointerMapping(dataStruct);
-			console.log(pointerMapping)
+
 			// var defer = $q.defer();
 			// Database.prototype.setKeys().then(function(data){
 			// 	if (data.error !== undefined) {
@@ -151,7 +151,6 @@ angular
 			for (var i = 0; i < keys.length; i++) 
 			{	
 				if (pointerMapping[keys[i]] && query[keys[i]] && query[keys[i]].$exists == null) {
-					console.log(pointerMapping[keys[i]])
 					query[keys[i]] = {
 						  __type: "Pointer",
 				        className: pointerMapping[keys[i]],
@@ -307,27 +306,22 @@ angular
 		// REST
 
 		Database.prototype.post = function(table_name, data){
-			console.log(data)
 			var table = new (Parse.Object.extend(table_name))();
 			// var defer = $q.defer();
 			Database.prototype.encodeQuery(data);
-			console.log(data)
 			table.save(data, {
 				success: function(data) {
 					// var results = new Database();
 					// results.setPointerMapping(pointerMapping);
-					console.log(data);
 					location.reload();
 				},
 				error: function(error) {
-					console.log(error);
 				}
 			});
 		    
 		};
 
 		Database.prototype.get = function(table_name, params){
-			console.log(params)
 			Database.prototype.encodeQuery(params);
 			var query = new Parse.Query(Parse.Object.extend(table_name));
 			var defer = $q.defer();
@@ -337,7 +331,6 @@ angular
 					query[parseParams[keys[i]]] = params[keys[i]];
 				}
 			}
-			console.log(query)
 			query.find({
 				success: function(data) {
 					var results = new Database();
@@ -345,7 +338,6 @@ angular
 					defer.resolve({results: results.decodeData(results.stripArray(data)), code: 200});
 				},
 				error: function(error) {
-					console.log(error)
 					handleParseError(error.code);
 					defer.resolve({results:{error: error.message, code: error.code}});
 				}

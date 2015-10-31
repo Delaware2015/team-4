@@ -16,7 +16,6 @@
       query.equalTo("objectId", data.objectId);
       query.first({
         success: function(object) {
-          console.log(object)
           var keys = Object.keys(payload);
           if (object) {
 
@@ -28,12 +27,10 @@
               $state.go("planner");
             });
           } else {
-            console.log("error")
           }
           
         },
         error: function(error) {
-          console.log("error")
           
         }
       });
@@ -49,7 +46,6 @@
       query.equalTo("objectId", data.objectId);
       query.first({
         success: function(object) {
-          console.log(object)
           var keys = Object.keys(payload);
           if (object) {
 

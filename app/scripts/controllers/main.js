@@ -18,7 +18,6 @@ angular.module('cfgApp')
     parseServies.init();
     // console.log(Parse.User.current().id)
     $rootScope.currentUser = parseServies.getCurrentUser();
-    console.log($rootScope.currentUser);
     // parseServiess.logout();
     // Parse.User.enableRevocableSession()
     $scope.init = function()
@@ -38,7 +37,6 @@ angular.module('cfgApp')
     }
     $scope.signup = function(credentials)
     {
-      console.log(credentials)
       delete credentials.passwordConfirm
       var user = new Parse.User();
       user.set("fname", credentials.fname);
@@ -48,11 +46,9 @@ angular.module('cfgApp')
       user.set("email", credentials.email);
       user.signUp(null, {
         success: function(data) {
-          console.log(Parse.User.current())
           $state.go("profile");
         },
         error: function(data, error) {
-          console.log(error)
         }
       });
     }
@@ -75,7 +71,6 @@ angular.module('cfgApp')
 
     $rootScope.get_user = function(ObjectId)
     {
-      console.log("here")
       var query = new Parse.Query(Parse.Object.extend("_User"));
       query["ObjectId"] = ObjectId;
       query._limit = 1;
@@ -84,7 +79,6 @@ angular.module('cfgApp')
           $rootScope.currentUser.info = data[0].attributes;
           $scope.profile = data[0].attributes;
           $rootScope.info = $rootScope.currentUser.info.username
-          console.log($rootScope.currentUser)
         },
         error: function(error) {
         }
