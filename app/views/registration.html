@@ -1,66 +1,67 @@
         <br>
-        </div>
-        </div>
-        <ul class ="pull-left">
-          <a href="#main"><img src="http://static1.squarespace.com/static/532b9929e4b04fa73367cfa7/53387d34e4b02123112ca915/53387d93e4b0d65d94f7c1bf/1396211092254/childrens+aid+society.jpg" alt="Logo" width="200" height="40"></a>
-          <li class="resources"><a href="#resourcesnot">Resources</a></li>
-          <li><a href="#registration">Registration</a></li>
-          <li><a href="#login">Log In</a></li>
-        </ul>
       </div>
     </div>
-    <br>
-    <br>
-    <br>
+    <ul class ="pull-left">
+      <a href="#main"><img src="http://static1.squarespace.com/static/532b9929e4b04fa73367cfa7/53387d34e4b02123112ca915/53387d93e4b0d65d94f7c1bf/1396211092254/childrens+aid+society.jpg" alt="Logo" width="200" height="40"></a>
+      <li class="resources"><a href="#resourcesnot">Resources</a></li>
+      <li><a href="#registration">Registration</a></li>
+        <li><a href="#awardnot">Ranking System</a></li>
+      <li><a href="#login">Log In</a></li>
+    </ul>
+  </div>
+</div>
+<br>
+<br>
+<br>
 
 <div class="jumbotron">
-        <div class="row centered-form">
-        <div class="col-xs-18 col-sm-14 col-md-10 col-sm-offset-0 col-md-offset-1">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Please sign up for My College <small>It's free!</small></h3>
-            </div>
-            <div class="panel-body">
-              <form role="form" ng-submit="signup(credentials)">
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                      <input type="text" name="username" id="username" class="form-control input-sm" placeholder="Username" ng-model="credentials.username" required>
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12col-md-12">
-                    <div class="form-group">
-                      <input type="text" name="name" id="name" class="form-control input-sm" placeholder="Name" ng-model="credentials.name" required>
-                    </div>
-                  </div>
-                </div>
-
+  <div class="row centered-form">
+    <div class="col-xs-18 col-sm-14 col-md-10 col-sm-offset-0 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Please sign up for My College <small>It's free!</small></h3>
+        </div>
+        <div class="panel-body">
+          <form role="form" ng-submit="signup(credentials)">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                  <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address" ng-model="credentials.email" required>
+                  <input type="text" name="username" id="username" class="form-control input-sm" placeholder="Username" ng-model="credentials.username" required>
                 </div>
-
-                <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                      <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password" ng-model="credentials.password" required>
-                    </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                      <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password" ng-model="credentials.passwordConfirm" required>
-                    </div>
-                    <div class="form-group" ng-show="credentials.passwordConfirm != credentials.password">
-                      <p>Passwords don't match</p>
-                    </div>
-                  </div>
+              </div>
+              <div class="col-xs-12 col-sm-12col-md-12">
+                <div class="form-group">
+                  <input type="text" name="name" id="name" class="form-control input-sm" placeholder="Name" ng-model="credentials.name" required>
                 </div>
-
-                
-                <input type="submit" value="Register" class="btn btn-info btn-block">
-              
-              </form>
+              </div>
             </div>
-          </div>
+
+            <div class="form-group">
+              <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address" ng-model="credentials.email" required>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                  <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password" ng-model="credentials.password" required>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                  <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password" ng-model="credentials.passwordConfirm" required>
+                </div>
+                <div class="form-group" ng-show="credentials.passwordConfirm != credentials.password">
+                  <p>Passwords don't match</p>
+                </div>
+              </div>
+            </div>
+
+            
+            <input type="submit" value="Register" class="btn btn-info btn-block">
+            
+          </form>
         </div>
       </div>
+    </div>
+  </div>
 </div>
