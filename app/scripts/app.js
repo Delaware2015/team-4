@@ -13,7 +13,8 @@ angular
     'ui.router',
     'parseServies',
     'ui.calendar',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'datePicker'
   ])
   .controller('AppCtrl', function ($rootScope) {
     $rootScope.isInit = false;
@@ -54,7 +55,7 @@ angular
         templateUrl: 'views/calendar.html',
         data: {
         },
-        controller: 'CalendarController',
+        controller: 'CalendarCtrl',
       })
 
       .state('profile', 
@@ -90,7 +91,7 @@ angular
         templateUrl: 'views/planner.html',
         data: {
         },
-        controller: 'MainCtrl',
+        controller: 'CalendarCtrl',
       })
 
       .state('social', 
@@ -111,6 +112,14 @@ angular
         controller: 'MainCtrl',
       })
 
+      .state('detail', 
+      {
+        url: "/detail",
+        templateUrl: 'views/detail.html',
+        data: {
+        },
+      })
+
       .state('checklist', 
       {
         url: "/checklist",
@@ -120,6 +129,5 @@ angular
         controller: 'MainCtrl',
       })
 
-    
   });
 
