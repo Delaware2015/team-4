@@ -4,6 +4,7 @@
   function CalendarCtrl($scope, $rootScope, parseServies, $q, $timeout, $state) {
     $scope.events = [];
     parseServies.init();
+    $rootScope.currentUser = parseServies.getCurrentUser();
     // parseServies.logout();
     $scope.complete_event = function(data)
     {
@@ -116,14 +117,24 @@
     // }
 
     // $scope.update_event()
-
+    console.log($rootScope.currentUser)
     $scope.get_events = function(start, end, timezone) {
-      console.log($rootScope.isInit)
       if (!$rootScope.isInit) {
         $rootScope.isInit = true;
         var where = {
-          status: "active"
+          status: "active",
+          $or : [{
+            createdBy: "RHVx74ZkKZ"
+          }, {
+            assignedTo: $rootScope.currentUser.id
+          }]
         }
+        console.log($rootScope.currentUser)
+        if (($rootScope.currentUser.info && $rootScope.currentUser.info.role == "admin") || $rootScope.currentUser.id == "RHVx74ZkKZ") {
+          delete where.$or;
+          where.createdBy= "RHVx74ZkKZ"
+        };
+
         var payload = {
           where: where
         }
@@ -163,14 +174,47 @@
       
     };
 
+    $rootScope.get_user = function(ObjectId)
+    {
+      console.log("here")
+      var query = new Parse.Query(Parse.Object.extend("_User"));
+      query["ObjectId"] = ObjectId;
+      query._limit = 1;
+      query.find({
+        success: function(data) {
+          console.log(data)
+          $rootScope.currentUser.info = data[0].attributes;
+          $scope.profile = data[0].attributes;
+          $rootScope.info = $rootScope.currentUser.info.username
+        },
+        error: function(error) {
+        }
+      });
+    }
+
+    if($rootScope.currentUser)
+    {
+      $rootScope.get_user($rootScope.currentUser.id)
+    }
+    
+
     $scope.add_task = function(data)
     {
       var payload = {
         name:data.name,
         description: data.description,
         due: data.due,
-        status: "active"
+        status: "active",
+        createdBy: $rootScope.currentUser.id,
       }
+      console.log($rootScope.currentUser.info.role)
+      if ($rootScope.currentUser.info.role == "user") {
+        payload.assignedTo = $rootScope.currentUser.id;
+      } else {
+        payload.assignedTo = "general"
+      }
+      console.log(payload)
+      parseServies.init();
       parseServies.post("Tasks", payload);
     }
 
