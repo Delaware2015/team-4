@@ -78,10 +78,10 @@ angular
         controller: 'MainCtrl',
       })
 
-      .state('resource', 
+      .state('resources', 
       {
-        url: "/resource",
-        templateUrl: 'views/resource.html',
+        url: "/resources",
+        templateUrl: 'views/resources.html',
         data: {
         },
         controller: 'MainCtrl',
@@ -100,6 +100,15 @@ angular
       {
         url: "/social",
         templateUrl: 'views/social.html',
+        data: {
+        },
+        controller: 'MainCtrl',
+      })
+
+      .state('main', 
+      {
+        url: "/main",
+        templateUrl: 'views/main.html',
         data: {
         },
         controller: 'MainCtrl',
