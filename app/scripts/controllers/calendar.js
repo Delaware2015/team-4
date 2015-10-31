@@ -1,14 +1,54 @@
 (function() {
   'use strict';
 
-  function CalendarCtrl($scope, $rootScope, parseServies, $q) {
+  function CalendarCtrl($scope, $rootScope, parseServies, $q, $timeout, $state) {
     $scope.events = [];
     parseServies.init();
+
+    $scope.update_event = function(data)
+    {
+      parseServies.init();
+      var payload = {
+        name:data.name,
+        description: data.description,
+      }
+
+      if (data.due) {
+        payload.due = data.due
+      };
+
+      console.log(payload)
+      var query = new Parse.Query(Parse.Object.extend("Tasks"));
+      parseServies.encodeQuery(payload);
+      query.equalTo("objectId", data.objectId);
+      query.first({
+        success: function(object) {
+          console.log(object)
+          var keys = Object.keys(data);
+          if (object) {
+            for (var i = 0; i < keys.length; i++) {
+              object.set(keys[i], data[keys[i]]);
+            }
+            console.log(object)
+            var result = object.save();
+            console.log(result)
+            result.then(function(){
+            });
+          } else {
+            // defer.resolve({results:{error: "parseServies object does not exist", code: 404}});
+            console.log("error")
+          }
+          
+        },
+        error: function(error) {
+          console.log("error")
+          
+        }
+      });
+    }
+
+
     $scope.get_events = function(start, end, timezone) {
-      var date = new Date();
-      var d = date.getDate();
-      var m = date.getMonth();
-      var y = date.getFullYear();
 
       var payload = {
         group: "pc8rTAXqaq"
@@ -16,6 +56,7 @@
       var defer = $q.defer();
       parseServies.get("Tasks", payload).then(function(data){
         if (!data.results.error) {
+          $rootScope.tasks = data.results;
           var event = {};
           $scope.events = [];
           for (var i = 0; i < data.results.length; i++) {
@@ -27,6 +68,10 @@
             event = {
               title: data.results[i].name,
               start: due_date,
+              objectId: data.results[i].objectId,
+              description: data.results[i].description,
+              due: data.results[i].due,
+              name: data.results[i].name
             };
             $scope.events.push(event);
             defer.resolve({results: $scope.events});
@@ -41,37 +86,56 @@
       return defer.promise; 
     };
 
-    // TODO: do modal popup here:
-    // $scope.alertOnEventClick = function( event, allDay, jsEvent, view ) {
-    //     // $scope.alertMessage = (event.title + ': Clicked ');
-    // };
+    $scope.add_task = function(data)
+    {
+      // var payload = {
+      //   name:data.name,
+      //   description: data.description,
+      //   due: data.due
+      // }
+      var payload = {
+        name: "name",
+        description: "des"
+      }
+      parseServies.post("Tasks", payload).then(function(data){
+        console.log(data)
+
+        if (!data.results.error) {
+        } else{
+          $scope.login_error = 'error';
+        }
+      })
+    }
+
+    
+    $scope.alertOnEventClick = function( date, jsEvent, view){
+      $scope.alertMessage = (date.title + ' was clicked ');
+      $rootScope.specific_task = date;
+      console.log($rootScope.specific_task)
+      $state.transitionTo("detail", date, {
+        reload: false
+      });
+    };
 
     /* config object */
     $scope.uiConfig = {
         calendar: {
             height: 450,
-            // TODO: allow edit
-            // editable: true,
+            editable: true,
             header: {
                 left: '',
                 center: 'title',
                 right: 'today, prev,next',
             },
             // TODO: turn on
-            // eventClick: $scope.alertOnEventClick,
+            eventClick: $scope.alertOnEventClick,
             eventRender: $scope.eventRender,
         }
     };
-
     $scope.eventRender = function( event, element, view ) {
-      var innerText = element.context.innerText;
-      var position = 0;
-      while (element.context.innerText.charAt(position) !== 'a' && element.context.innerText.charAt(position) !== 'p' && position < element.context.innerText.length)
-      {
-        position++;
-      };
-      position++;
-      element.context.innerText = [innerText.slice(0, position), "m", innerText.slice(position)].join('');
+        element.attr({'tooltip': event.title,
+                     'tooltip-append-to-body': true});
+        $compile(element)($scope);
     };
 
     $scope.eventsCallback = function (start, end, timezone, callback) {

@@ -16,7 +16,8 @@ angular
     'ui.router',
     'parseServies',
     'ui.calendar',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'datePicker'
   ])
   .controller('AppCtrl', function ($rootScope) {
     $rootScope.isInit = false;
@@ -114,6 +115,12 @@ angular
         controller: 'MainCtrl',
       })
 
-    
+      .state('detail', 
+      {
+        url: "/detail",
+        templateUrl: 'views/detail.html',
+        data: {
+        },
+      })
   });
 

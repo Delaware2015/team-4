@@ -102,3 +102,8 @@ body {
 .panel-body {
   padding: 15px;
 }
+
+.inner {
+    width: 50%;
+    margin: 0 auto;
+}

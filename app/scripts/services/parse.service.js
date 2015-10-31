@@ -14,7 +14,7 @@ angular
 		// Initialize database
 		Database.prototype.init = function()
 		{
-			var defer = $q.defer();
+			// var defer = $q.defer();
 			Parse.initialize("Plbvy8xPvouq0pI393QyANx9TWXkh4gqk5nRVlod", "9lpB4VEEFy9Gb9bBnbSlRDxdnwIqoOXGjKfViFW0");
 			Parse.User.enableRevocableSession();
 			var dataStruct = {
