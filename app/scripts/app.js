@@ -138,6 +138,15 @@ angular
         controller: 'MainCtrl',
       })
 
+      .state('resourcesnot', 
+      {
+        url: "/resourcesnot",
+        templateUrl: 'views/resourcesnot.html',
+        data: {
+        },
+        controller: 'MainCtrl',
+      })
+
 
   });
 
