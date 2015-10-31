@@ -239,8 +239,6 @@ angular
 		};
 
 		Database.prototype.login = function(data){
-			// Parse.User.logOut();
-			console.log(data)
 			var defer = $q.defer();
 			Parse.User.logIn(data.username, data.password, {
 				success: function(data) {

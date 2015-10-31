@@ -61,20 +61,48 @@ angular.module('cfgApp')
     {
       parseServies.login(credentials).then(function(data)
       {
-        // $rootScope.currentUser = parseServies.getCurrentUser().attributes;
         var query = new Parse.Query(Parse.Object.extend("_User"));
         query["username"] = credentials.username;
         query._limit = 1;
         query.find({
           success: function(data) {
             $rootScope.currentUser = data[0].attributes;
+            $scope.profile = data[0].attributes;
             $state.go("profile");
           },
           error: function(error) {
           }
         });
       })
-      
+    }
+
+    $rootScope.logout = function(ObjectId)
+    {
+      parseServies.logout();
+      $state.go("main");
+    }
+
+    $scope.get_user = function(ObjectId)
+    {
+      console.log("here")
+      var query = new Parse.Query(Parse.Object.extend("_User"));
+      query["ObjectId"] = ObjectId;
+      query._limit = 1;
+      query.find({
+        success: function(data) {
+          $rootScope.currentUser.info = data[0].attributes;
+          $scope.profile = data[0].attributes;
+          $rootScope.info = $rootScope.currentUser.info.username
+          console.log($rootScope.currentUser)
+        },
+        error: function(error) {
+        }
+      });
+    }
+
+    if($rootScope.currentUser)
+    {
+      $scope.get_user($rootScope.currentUser.id)
     }
 
     // $scope.get_tasks = function()
