@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+echo "Installing bower"
+npm install bower
+
+echo "Installing bower dependencies"
+bower install
+
+echo "Installing npm packages"
+npm install
