@@ -2,12 +2,11 @@
  	<ul>
  		<a href="#profile"><img src="http://static1.squarespace.com/static/532b9929e4b04fa73367cfa7/53387d34e4b02123112ca915/53387d93e4b0d65d94f7c1bf/1396211092254/childrens+aid+society.jpg" alt="Logo" width="200" height="40" ></a>
 
-
 <li class="checklist"><a class="active" href="#checklist">Checklist</a></li>
     <li class="planner"><a href="#planner">Planner</a></li>
     <li class="social"><a href="#social">Social</a></li>
     <li class="resources"><a href="#resources">Resources</a></li>
-    <li class="award"><a href="#award">Rank</a></li>
+    <li class="award"><a href="#awards">Rank</a></li>
     <li class="logout"><a href="#main">Log out</a></li>
  	</ul>
  </div>
@@ -18,6 +17,17 @@
  </button>
 	<div class="ibox-content ui-calendar">
 	    <div ui-calendar="uiConfig.calendar" class="calendar" ng-model="eventSources"></div>
+
+    
+    <div class="container">
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+			New task
+		</button>
+		<div class="ibox-content ui-calendar">
+		    <div ui-calendar="uiConfig.calendar" class="calendar" ng-model="eventSources"></div>
+		</div>
+
 	</div>
 
 	<!-- Modal -->
@@ -53,43 +63,4 @@
 		</div>
 	</div>
 </div>
-=======
-
- <div class="ibox-content ui-calendar">
- 	<div ui-calendar="uiConfig.calendar" class="calendar" ng-model="eventSources"></div>
- </div>
-
- <!-- Modal -->
- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
- 	<div class="modal-dialog" role="document">
- 		<div class="modal-content">
- 			<div class="modal-header">
- 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
- 				<h4 class="modal-title" id="myModalLabel">Create task</h4>
- 			</div>
- 			<form method="post">
- 				<div class="modal-body">
- 					<div class="form-group">
- 						<label for="recipient-name" class="control-label">Name:</label>
- 						<input type="text" class="form-control" id="recipient-name" ng-model="task.name">
- 					</div>
- 					<div class="form-group">
- 						<label for="message-text" class="control-label">Description:</label>
- 						<textarea class="form-control" id="message-text" ng-model="task.description"></textarea>
- 					</div>
- 					<div class="form-group">
- 						<label for="message-text" class="control-label">Due date:</label>
- 						<div date-picker="start" min-view="date" class="inner" ng-model="task.due"></div>
- 					</div>
-
- 				</div>
- 				<div class="modal-footer">
- 					<button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
- 					<button class="btn btn-primary" type="submit" ng-click="add_task(task)">Save changes</button>
- 				</div>
- 			</form>
- 		</div>
- 	</div>
- </div>
->>>>>>> 21623c71f9af6b787922a90644b5f988833c566e
-
+	

@@ -219,3 +219,43 @@ body {
   font-size:28px;
 }
 
+.Reward h1{
+    color: #58D3F7;
+    font-size: 55px;
+}
+.Reward p{
+  font-size:20px;
+  color: #000000;
+}
+.Reward p1{
+  color: #000000;
+  font-size:15px;
+}
+.Reward p2{
+  color:#999999;
+  font-size:45px;
+}
+.Reward p3{
+  color:#CC9966;
+  font-size:45px;
+}
+.Reward p4{
+    color:#993300;
+    font-size:45px;
+}
+.Reward p5{
+  color:#CCCCFF;
+  font-size:45px;
+}
+.Reward p6{
+  color:#FFCC00;
+  font-size:45px;
+}
+.Reward p7{
+  color:#CCCCCC;
+  font-size:45px;
+}
+.Reward p8{
+  color:#58D3F7;
+  font-size:45px;
+}

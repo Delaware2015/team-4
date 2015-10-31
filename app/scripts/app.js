@@ -147,6 +147,25 @@
       controller: 'MainCtrl',
     })
 
+        .state('awardsnot', 
+    {
+      url: "/awardsnot",
+      templateUrl: 'views/awardsnot.html',
+      data: {
+      },
+      controller: 'MainCtrl',
+    })
+
+
+    .state('awards', 
+    {
+      url: "/awards",
+      templateUrl: 'views/awards.html',
+      data: {
+      },
+      controller: 'MainCtrl',
+    })
+
 
   });
 
