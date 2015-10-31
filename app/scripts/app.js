@@ -63,6 +63,33 @@ angular
         controller: 'MainCtrl',
       })
 
+      .state('resource', 
+      {
+        url: "/resource",
+        templateUrl: 'views/resource.html',
+        data: {
+        },
+        controller: 'MainCtrl',
+      })
+
+      .state('planner', 
+      {
+        url: "/planner",
+        templateUrl: 'views/planner.html',
+        data: {
+        },
+        controller: 'MainCtrl',
+      })
+
+      .state('social', 
+      {
+        url: "/social",
+        templateUrl: 'views/social.html',
+        data: {
+        },
+        controller: 'MainCtrl',
+      })
+
     
   });
 
