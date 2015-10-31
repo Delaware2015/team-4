@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
     <link rel="stylesheet" href="bower_components/angular-datepicker/dist/angular-datepicker.css" />
-    <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
-    <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -25,9 +23,13 @@
       <![endif]-->
 
     <!-- Add your site or application content here -->
+    <div class="header">
+      <div ng-include="'views/navbar.html'"></div>
+    </div>
     
-
-    <div ui-view="" class="row"></div>
+    <div class="row" >
+      <div ui-view=""></div>
+    </div>
 
 
     <div class="footer">
@@ -51,20 +53,15 @@
        <!-- build:js(.) scripts/vendor.js -->
        <!-- bower:js -->
        <script src="bower_components/jquery/dist/jquery.js"></script>
-
        <script src="bower_components/angular/angular.js"></script>
-
        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-
        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-       
-       <script src="bower_components/angular-datepicker/dist/angular-datepicker.js"></script>
-
-       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script> 
-       <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
-       <script src="bower_components/lodash/lodash.js"></script>
        <script src="bower_components/moment/moment.js"></script>
        <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+       <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+       <script src="bower_components/lodash/lodash.js"></script>
+       <script src="bower_components/angular-datepicker/dist/angular-datepicker.js"></script>
        <!-- endbower -->
        <!-- endbuild -->
 

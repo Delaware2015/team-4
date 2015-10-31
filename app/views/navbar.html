@@ -14,10 +14,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a ui-sref="planner">Planner<span class="sr-only">(current)</span></a></li>
+        <li ng-if="currentUser"><a ui-sref="planner">Planner<span class="sr-only">(current)</span></a></li>
         <li><a ui-sref="resources">Resources</a></li>
-        <li><a ui-sref="social">Social</a></li>
-        <li><a ui-sref="awards">Awards</a></li>
+        <li ng-if="currentUser"><a ui-sref="social">Social</a></li>
+        <li ng-if="currentUser"><a ui-sref="awards">Awards</a></li>
+        <li ng-if="currentUser"><a ui-sref="checklist">Checklist</a></li>
         <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" ng-if="currentUser">
@@ -37,6 +38,7 @@
         <li ng-if="!currentUser"><a ui-sref="login">Login</a></li>
         <li ng-if="!currentUser"><a ui-sref="signup">Signup</a></li>
         <li ng-if="currentUser"><a ui-sref="profile">Profile</a></li>
+        <li ng-if="currentUser"><a href="" ng-click="logout()">Logout</a></li>
         <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
           <ul class="dropdown-menu">

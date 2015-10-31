@@ -141,7 +141,7 @@ body {
 .jumbotron h1 {   
   color: #fff;
   font-size: 68px;  
-  font-family: font-family: 'Cabin', sans-serif;
+  font-family: 'Cabin', sans-serif;
   font-weight: bold;
 }
 
@@ -155,7 +155,7 @@ body {
 }
 
 .learn-more h3 {
-  font-family: font-family: 'Cabin', sans-serif;
+  font-family: 'Cabin', sans-serif;
   font-size: 18px;
   font-weight: bold;
 }
@@ -262,5 +262,4 @@ body {
 .Reward p8{
   color:#58D3F7;
   font-size:45px;
->>>>>>> bab3490729f0f1a361b465c6d0862105bf4be925
 }
