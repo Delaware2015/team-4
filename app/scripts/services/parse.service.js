@@ -50,22 +50,6 @@ angular
 
 			}; 
 			Database.prototype.setPointerMapping(dataStruct);
-
-			// var defer = $q.defer();
-			// Database.prototype.setKeys().then(function(data){
-			// 	if (data.error !== undefined) {
-			// 		console.error(data.error.message);
-			// 	};
-			// 	
-			// })
-			// Database.prototype.modelDatabase().then(function(data){
-			// 	if (data.error !== undefined) {
-			// 		console.error(data.error.message);
-			// 	};
-
-			// 	defer.resolve({results:{message: 'Successfully initialized', code: 202}});
-			// })
-			// return defer.promise;
 		}
 
 		Database.prototype.setPointerMapping = function(tables) {
@@ -438,21 +422,6 @@ angular
 			}
 		}
 
-		// function checkFlag(param) {
-		//     if($rootScope.is_initialized == false) {
-		//         window.setTimeout(checkFlag, 1); /* Database.prototype checks the flag every 100 milliseconds*/
-		//     } else {
-		//     	console.log("hello")
-		//     }
-		// }
-
-
-		// Database.prototype.request = function(method, table_name, data, objectId)
-		// {
-		// 	if ($rootScope.is_initialized == false) {
-		// 		Database.prototype.init
-		// 	};
-		// }
 	});
 
 	

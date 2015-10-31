@@ -245,7 +245,6 @@
     };
 
     $scope.eventsCallback = function (start, end, timezone, callback) {
-      console.log("here")
       if (!$rootScope.isInit) {
         $scope.get_events(start, end, timezone).then(function() {
           callback($scope.events);
