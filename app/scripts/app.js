@@ -14,6 +14,7 @@
 angular
   .module('cfgApp', [
     'ui.router',
+    'parseServies'
   ])
   .config(function ($stateProvider) {
     // $routeProvider
