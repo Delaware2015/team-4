@@ -8,15 +8,15 @@
       <form>
         User Name
         <br>
-        <input type="text" name ="username" value="" required>
+        <input type="text" name ="username" value="" required ng-model="credentials.username">
         <br>
         <br>
         Password
         <br>
-        <input type="password" name ="password" required>
+        <input type="password" name ="password" required ng-model="credentials.password">
         <br>
         <br>
-        <input type="submit" value="Login" name="Login">
+        <input type="submit" value="Login" name="Login" ng-click="login(credentials)">
         <br><br>
       </form>      
     </center>
