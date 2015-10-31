@@ -13,11 +13,11 @@
     </div>
 
     <div class="pull-left">
-        <button type="submit" class="btn btn-primary pull-left btn-sm" ng-if="user.role=='admin' || specific_task.createdBy.objectId==user.objectId" ladda="loading_update" data-size="xs">Update</button>
-        <button class="btn btn-success btn-sm" type="button" ng-if="user.role=='user' && specific_task.status == 'active'" ng-click="toggle_specific_task(specific_task)" ladda="loading_toggle_specific_task" data-size="xs">
+        <button type="submit" class="btn btn-primary pull-left btn-sm" data-size="xs">Update</button>
+        <button class="btn btn-success btn-sm" type="button" ng-if="user.role=='user' && specific_task.status == 'active'" ng-click="toggle_specific_task(specific_task)" data-size="xs">
         Complete
         </button>
-        <button class="btn btn-danger pull-right btn-sm" type="button" ng-click="confirm_delete('specific_tasks', specific_task)" ng-if="user.role=='admin' || specific_task.createdBy.objectId==user.objectId" data-size="xs" ladda="loading_delete_specific_task">
+        <button class="btn btn-danger pull-right btn-sm" type="button" ng-click="delete_event(specific_task)" data-size="xs" >
         Delete
         </button>
     </div>

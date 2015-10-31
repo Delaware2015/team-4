@@ -4,35 +4,65 @@
   function CalendarCtrl($scope, $rootScope, parseServies, $q, $timeout, $state) {
     $scope.events = [];
     parseServies.init();
+    parseServies.logout();
+    $scope.delete_event = function(data)
+    {
+      var payload = {
+        status: "deleted"
+      }
+
+      var query = new Parse.Query(Parse.Object.extend("Tasks"));
+      query.equalTo("objectId", data.objectId);
+      query.first({
+        success: function(object) {
+          console.log(object)
+          var keys = Object.keys(payload);
+          if (object) {
+
+            for (var i = 0; i < keys.length; i++) {
+              object.set(keys[i], payload[keys[i]]);
+            }
+            var result = object.save();
+            result.then(function(){
+              $state.go("planner");
+            });
+          } else {
+            console.log("error")
+          }
+          
+        },
+        error: function(error) {
+          console.log("error")
+          
+        }
+      });
+    }
 
     $scope.update_event = function(data)
     {
-      parseServies.init();
       var payload = {
         name:data.name,
         description: data.description,
       }
 
-      if (data.due) {
+      if (data.due != null && data.due != "") {
         payload.due = data.due
       };
 
-      console.log(payload)
       var query = new Parse.Query(Parse.Object.extend("Tasks"));
-      parseServies.encodeQuery(payload);
       query.equalTo("objectId", data.objectId);
       query.first({
         success: function(object) {
           console.log(object)
-          var keys = Object.keys(data);
+          var keys = Object.keys(payload);
           if (object) {
+
             for (var i = 0; i < keys.length; i++) {
-              object.set(keys[i], data[keys[i]]);
+              object.set(keys[i], payload[keys[i]]);
             }
-            console.log(object)
             var result = object.save();
-            console.log(result)
             result.then(function(){
+              $state.go("planner");
             });
           } else {
             // defer.resolve({results:{error: "parseServies object does not exist", code: 404}});
@@ -46,12 +76,26 @@
         }
       });
     }
+    // var payload = {
+    //   name: "name",
+    //   description: "data.description,",
+    //   objectId: "oZW6Z4bxee"
+    // }
 
+    // $scope.update_event()
 
     $scope.get_events = function(start, end, timezone) {
+      if (!$rootScope.isInit) {
+        $rootScope.isInit = true;
+      } else {
+        // location.reload();
+      }
 
+      var where = {
+        status: "active"
+      }
       var payload = {
-        group: "pc8rTAXqaq"
+        where: where
       }
       var defer = $q.defer();
       parseServies.get("Tasks", payload).then(function(data){
@@ -88,30 +132,19 @@
 
     $scope.add_task = function(data)
     {
-      // var payload = {
-      //   name:data.name,
-      //   description: data.description,
-      //   due: data.due
-      // }
       var payload = {
-        name: "name",
-        description: "des"
+        name:data.name,
+        description: data.description,
+        due: data.due,
+        status: "active"
       }
-      parseServies.post("Tasks", payload).then(function(data){
-        console.log(data)
-
-        if (!data.results.error) {
-        } else{
-          $scope.login_error = 'error';
-        }
-      })
+      parseServies.post("Tasks", payload);
     }
 
     
     $scope.alertOnEventClick = function( date, jsEvent, view){
       $scope.alertMessage = (date.title + ' was clicked ');
       $rootScope.specific_task = date;
-      console.log($rootScope.specific_task)
       $state.transitionTo("detail", date, {
         reload: false
       });

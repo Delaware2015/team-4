@@ -38,33 +38,32 @@ angular.module('cfgApp')
     }
     $scope.signup = function(credentials)
     {
-        var credentials = {
-          // username: "test1",
-          // password: "test",
-          // group: "pc8rTAXqaq"
-        }
-        console.log("here")
-        parseServies.signup(credentials, $q).then(function(data){
-        if (!data.results.error) {
-          console.log(data.results);
-        } else{
-          console.log(data.results.error);
-          $scope.login_error = 'Your username or password is incorrect';
-        }
-      })
-    }
-    
-    $scope.login = function(credentials)
-    {
-      Parse.User.logIn(credentials.username, credentials.password, {
+      var user = new Parse.User();
+      user.set("username", credentials.username);
+      user.set("password", credentials.password);
+      user.set("email", credentials.email);
+      user.signUp(null, {
         success: function(data) {
-          console.log(data)
-          $state.go("profile");
+          console.log(Parse.User.current())
         },
         error: function(data, error) {
-          console.log(data)
+          handleParseError(error.code);
+
         }
       });
+    }
+
+    $scope.login = function(credentials)
+    {
+      // Parse.User.logIn(credentials.username, credentials.password, {
+      //   success: function(data) {
+      //     $rootScope.currentUser = data;
+      //   },
+      //   error: function(data, error) {
+
+      //   }
+      // });
+      $state.go("profile");
     }
 
     $scope.get_tasks = function()
