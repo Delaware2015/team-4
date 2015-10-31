@@ -126,6 +126,8 @@ body {
   background-size: cover;
 }
 
+
+
 .background_main {
   background-image:url(https://www.shc.psu.edu/img/admissions/campus_mall.jpg);   
 }
@@ -173,4 +175,21 @@ body {
  font-size: 15px;
  margin-bottom: 13px;
 }
->>>>>>> 76174a9c1473c13ec54d2a5243a87f2c65f36527
+
+.forum.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.forum .fa {
+    width: 1em;
+    text-align: center;
+}
+
+.forum.table th.cell-stat {
+    width: 6em;
+}
+
+.forum.table th.cell-stat-2x {
+    width: 14em;
+}
+

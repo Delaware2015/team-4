@@ -8,7 +8,7 @@
  * Controller of the cfgApp
  */
 angular.module('cfgApp')
-  .controller('MainCtrl', function ($scope, parseServies, $rootScope, $compile, $q) {
+  .controller('MainCtrl', function ($scope, parseServies, $rootScope, $compile, $q, $state) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
