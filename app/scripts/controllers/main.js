@@ -57,6 +57,7 @@ angular.module('cfgApp')
     {
     	parseServies.login(credentials).then(function(data){
         if (!data.results.error) {
+          $state.go("profile");
         } else{
           $scope.login_error = 'Your username or password is incorrect';
         }

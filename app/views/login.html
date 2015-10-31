@@ -5,7 +5,7 @@
         Log in
       </legend>
       <center>
-      <form>
+      <form method="post" ng-submit="login(credentials)">
         User Name
         <br>
         <input type="text" name ="username" value="" required ng-model="credentials.username">
@@ -20,6 +20,5 @@
         <br><br>
       </form>      
     </center>
-    <a href="" ng-click="get_tasks()">here</a>
     </fieldset>
 </div>
