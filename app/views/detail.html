@@ -14,7 +14,7 @@
 
     <div class="pull-left">
         <button type="submit" class="btn btn-primary pull-left btn-sm" data-size="xs">Update</button>
-        <button class="btn btn-success btn-sm" type="button" ng-if="user.role=='user' && specific_task.status == 'active'" ng-click="toggle_specific_task(specific_task)" data-size="xs">
+        <button class="btn btn-success btn-sm" type="button" ng-click="complete_event(specific_task)" data-size="xs">
         Complete
         </button>
         <button class="btn btn-danger pull-right btn-sm" type="button" ng-click="delete_event(specific_task)" data-size="xs" >

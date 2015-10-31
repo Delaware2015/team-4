@@ -5,6 +5,39 @@
     $scope.events = [];
     parseServies.init();
     // parseServies.logout();
+    $scope.complete_event = function(data)
+    {
+      var payload = {
+        status: "completed"
+      }
+
+      var query = new Parse.Query(Parse.Object.extend("Tasks"));
+      query.equalTo("objectId", data.objectId);
+      query.first({
+        success: function(object) {
+          console.log(object)
+          var keys = Object.keys(payload);
+          if (object) {
+
+            for (var i = 0; i < keys.length; i++) {
+              object.set(keys[i], payload[keys[i]]);
+            }
+            var result = object.save();
+            result.then(function(){
+              $state.go("planner");
+            });
+          } else {
+            console.log("error")
+          }
+          
+        },
+        error: function(error) {
+          console.log("error")
+          
+        }
+      });
+    }
+
     $scope.delete_event = function(data)
     {
       var payload = {
