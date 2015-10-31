@@ -9,6 +9,7 @@ angular
 		var dataType = ['string', 'pointer', 'time', 'bolean', 'number'];
 		var parseParams = {include: "_include", limit: "_limit", skip: "_skip", where: "_where", select: "_select", order: "_order"};
 		var pointerMapping = {};
+
 		// TODO reading all credentials from external files and make all functions wait
 		// untill it finishes reading
 		// Initialize database
@@ -16,6 +17,9 @@ angular
 		{
 			// var defer = $q.defer();
 			Parse.initialize("Plbvy8xPvouq0pI393QyANx9TWXkh4gqk5nRVlod", "9lpB4VEEFy9Gb9bBnbSlRDxdnwIqoOXGjKfViFW0");
+			if (Parse.User && Parse.User.current() && $rootScope) {
+				$rootScope.currentUser = Parse.User.current();
+			};
 			// $rootScope.sessionUser = Parse.User.current();
 			// Parse.User.enableRevocableSession();
 			var dataStruct = {
@@ -31,6 +35,10 @@ angular
 			          "_type": "pointer",
 			          "to": "_User"
 			        },
+			        "assignedTo": {
+			          "_type": "pointer",
+			          "to": "_User"
+			        },
 			    },
 
 			    "TaskStatus": {
@@ -42,6 +50,7 @@ angular
 
 			}; 
 			Database.prototype.setPointerMapping(dataStruct);
+			console.log(pointerMapping)
 			// var defer = $q.defer();
 			// Database.prototype.setKeys().then(function(data){
 			// 	if (data.error !== undefined) {
@@ -140,8 +149,9 @@ angular
 		Database.prototype.encodeQuery = function(query){
 			var keys = Object.keys(query);
 			for (var i = 0; i < keys.length; i++) 
-			{
-				if (pointerMapping[keys[i]]) {
+			{	
+				if (pointerMapping[keys[i]] && query[keys[i]] && query[keys[i]].$exists == null) {
+					console.log(pointerMapping[keys[i]])
 					query[keys[i]] = {
 						  __type: "Pointer",
 				        className: pointerMapping[keys[i]],
@@ -239,21 +249,14 @@ angular
 		};
 
 		Database.prototype.login = function(data){
-			var defer = $q.defer();
 			Parse.User.logIn(data.username, data.password, {
 				success: function(data) {
-					var results = new Database();
-					results.setPointerMapping(pointerMapping);
-					defer.resolve({results: results.decodeData(results.stripObject(data)), code: 200});
-					$rootScope.$apply();
+					$rootScope.currentUser = Parse.User.current();
 				},
 				error: function(data, error) {
-					handleParseError(error.code);
-					defer.resolve({results:{error: error.message, code: error.code}});
 					
 				}
 			});
-			return defer.promise;
 		};
 
 		Database.prototype.getCurrentUser = function()
@@ -263,6 +266,8 @@ angular
 
 		Database.prototype.logout = function(){
 			Parse.User.logOut();
+			// $rootScope.currentUser = null;
+			location.reload();
 		};
 
 		Database.prototype.updateUser = function(data){
@@ -302,9 +307,11 @@ angular
 		// REST
 
 		Database.prototype.post = function(table_name, data){
+			console.log(data)
 			var table = new (Parse.Object.extend(table_name))();
 			// var defer = $q.defer();
 			Database.prototype.encodeQuery(data);
+			console.log(data)
 			table.save(data, {
 				success: function(data) {
 					// var results = new Database();
@@ -313,13 +320,14 @@ angular
 					location.reload();
 				},
 				error: function(error) {
-					
+					console.log(error);
 				}
 			});
 		    
 		};
 
 		Database.prototype.get = function(table_name, params){
+			console.log(params)
 			Database.prototype.encodeQuery(params);
 			var query = new Parse.Query(Parse.Object.extend(table_name));
 			var defer = $q.defer();
@@ -329,7 +337,7 @@ angular
 					query[parseParams[keys[i]]] = params[keys[i]];
 				}
 			}
-
+			console.log(query)
 			query.find({
 				success: function(data) {
 					var results = new Database();
@@ -337,6 +345,7 @@ angular
 					defer.resolve({results: results.decodeData(results.stripArray(data)), code: 200});
 				},
 				error: function(error) {
+					console.log(error)
 					handleParseError(error.code);
 					defer.resolve({results:{error: error.message, code: error.code}});
 				}

@@ -1,24 +1,26 @@
-<form role="form" method="post" ng-submit="update_event(specific_task)" ng-controller="CalendarCtrl">
-    <div class="form-group">
-        <label>Task Name</label>
-        <input type="text" placeholder="Name" class="form-control" autofocus="true" ng-model="specific_task.name" required>
-    </div>
-    <div class="form-group">
-        <label>Description</label>
-        <textarea class="form-control" rows="3" ng-model="specific_task.description"></textarea>
-    </div>
-    <div class="form-group">
-        <label>Due On</label>
-        <input class="form-control" placeholder="Select a due date" ng-init="due = specific_task.due" ng-model="specific_task.due.iso" aria-haspopup="true" aria-expanded="true"/>
-    </div>
+<div class="container">
+  <form role="form" method="post" ng-submit="update_event(specific_task)" ng-controller="CalendarCtrl">
+      <div class="form-group">
+          <label>Task Name</label>
+          <input type="text" placeholder="Name" class="form-control" autofocus="true" ng-model="specific_task.name" required>
+      </div>
+      <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" rows="3" ng-model="specific_task.description"></textarea>
+      </div>
+      <div class="form-group">
+          <label>Due On</label>
+          <input class="form-control" placeholder="Select a due date" ng-init="due = specific_task.due" ng-model="specific_task.due.iso" aria-haspopup="true" aria-expanded="true"/>
+      </div>
 
-    <div class="pull-left">
-        <button type="submit" class="btn btn-primary pull-left btn-sm" data-size="xs">Update</button>
-        <button class="btn btn-success btn-sm" type="button" ng-if="user.role=='user' && specific_task.status == 'active'" ng-click="toggle_specific_task(specific_task)" data-size="xs">
-        Complete
-        </button>
-        <button class="btn btn-danger pull-right btn-sm" type="button" ng-click="delete_event(specific_task)" data-size="xs" >
-        Delete
-        </button>
-    </div>
-</form>
+      <div class="pull-left">
+          <button type="submit" class="btn btn-primary pull-left btn-sm" data-size="xs">Update</button>
+          <button class="btn btn-success btn-sm" type="button" ng-click="complete_event(specific_task)" data-size="xs">
+          Complete
+          </button>
+          <button class="btn btn-danger pull-right btn-sm" type="button" ng-click="delete_event(specific_task)" data-size="xs" >
+          Delete
+          </button>
+      </div>
+  </form>
+</div>

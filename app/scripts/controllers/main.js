@@ -57,32 +57,23 @@ angular.module('cfgApp')
       });
     }
 
+    $scope.reload = function ()
+    {
+      location.reload();
+    }
+
     $scope.login = function(credentials)
     {
-      parseServies.login(credentials).then(function(data)
-      {
-        var query = new Parse.Query(Parse.Object.extend("_User"));
-        query["username"] = credentials.username;
-        query._limit = 1;
-        query.find({
-          success: function(data) {
-            $rootScope.currentUser = data[0].attributes;
-            $scope.profile = data[0].attributes;
-            $state.go("profile");
-          },
-          error: function(error) {
-          }
-        });
-      })
+      parseServies.login(credentials);
+      $state.go("profile");
     }
 
     $rootScope.logout = function(ObjectId)
     {
       parseServies.logout();
-      $state.go("main");
     }
 
-    $scope.get_user = function(ObjectId)
+    $rootScope.get_user = function(ObjectId)
     {
       console.log("here")
       var query = new Parse.Query(Parse.Object.extend("_User"));
@@ -102,7 +93,7 @@ angular.module('cfgApp')
 
     if($rootScope.currentUser)
     {
-      $scope.get_user($rootScope.currentUser.id)
+      $rootScope.get_user($rootScope.currentUser.id)
     }
 
     // $scope.get_tasks = function()
