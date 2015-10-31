@@ -219,3 +219,7 @@ body {
   font-size:28px;
 }
 
+.brand {
+  padding-top: -10px;
+  margin: -10px;
+}
