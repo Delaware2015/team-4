@@ -8,7 +8,7 @@
  * Controller of the cfgApp
  */
 angular.module('cfgApp')
-  .controller('MainCtrl', function ($scope, parseServies, $rootScope, $compile) {
+  .controller('MainCtrl', function ($scope, parseServies, $rootScope, $compile, $q) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -29,7 +29,7 @@ angular.module('cfgApp')
     // console.log($rootScope.isInit)
     $scope.init()
 
-    $rootScope.currentUser = parseServies.getCurrentUser();
+    // $rootScope.currentUser = parseServies.getCurrentUser();
 
     var credentials = {
       username: "test1",
@@ -44,7 +44,7 @@ angular.module('cfgApp')
           // group: "pc8rTAXqaq"
         }
         console.log("here")
-        parseServies.signup(credentials).then(function(data){
+        parseServies.signup(credentials, $q).then(function(data){
         if (!data.results.error) {
           console.log(data.results);
         } else{
@@ -53,18 +53,20 @@ angular.module('cfgApp')
         }
       })
     }
+    
     $scope.login = function(credentials)
     {
-      parseServies.login(credentials).then(function(data){
-        if (!data.results.error) {
-        } else{
-          $scope.login_error = 'Your username or password is incorrect';
+      Parse.User.logIn(credentials.username, credentials.password, {
+        success: function(data) {
+          console.log(data)
+        },
+        error: function(data, error) {
+          console.log(data)
+          
         }
-      })
+      });
     }
-    // $scope.login(credentials);
-    // $rootScope.currentUser = parseServies.getCurrentUser();
-    // console.log($rootScope.currentUser)
+
     $scope.get_tasks = function()
     {
       $rootScope.currentUser = parseServies.getCurrentUser();
